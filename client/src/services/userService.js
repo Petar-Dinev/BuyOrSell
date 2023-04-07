@@ -1,17 +1,23 @@
 import * as request from './requester';
 
-const create = async (data) => {
-    const user = await request.post('users', data)
-    console.log(user);
-    return user
+const baseUrl = 'http://localhost:3030/users/'
+
+const register = async (data) => {
+    return await request.post(`${baseUrl}register`, data)
+    
 }
 
-const getOne = async (userId) => {
-    const user = await request.get(`users/${userId}`)
-    return user;
+const login = async (data) => {
+    return await request.post(`${baseUrl}login`, data)
+    
+}
+
+const logout = async (token) => {
+   return await fetch(`${baseUrl}logout`)
 }
 
 export {
-    getOne,
-    create
+    register,
+    login,
+    logout
 }
