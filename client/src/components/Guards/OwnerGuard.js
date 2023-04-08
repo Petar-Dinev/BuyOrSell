@@ -5,12 +5,13 @@ import { useAuthContext } from "../../contexts/AuthContext";
 const OwnerGuard = ({ children }) => {
   const { carAdId } = useParams();
   const { getCarAd } = useCarAdContext();
-  const { userId } = useAuthContext();
+  const { userData } = useAuthContext();
 
   const currentCarAd = getCarAd(carAdId);
 
-  if(currentCarAd && currentCarAd._ownerId === userId) {
-    return <Navigate to={`/cars/${carAdId}`} replace />
+  if(currentCarAd && currentCarAd._ownerId !== userData._id) {
+    console.log("hi");
+    return <Navigate to={`/catalog/${carAdId}`} replace />
   }
 
   return children ? children : <Outlet />
