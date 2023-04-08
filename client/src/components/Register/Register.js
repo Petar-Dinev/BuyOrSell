@@ -1,58 +1,77 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { register } from "../../services/userService";
-import styles from "./registerCSS.css";
+import { Link } from "react-router-dom";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useForm } from "../../hooks/useForm";
 
 const Register = () => {
-  const [userData, setUserData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
-
-  const navigate = useNavigate();
-
-  const onUserDataChange = (e) => {
-    setUserData(state => ({...state, [e.target.name]: e.target.value}))
-  }
-
-  const onSubmitHandler = async (e) => {
-    e.preventDefault()
-    const {confirmPassword, ...userInfo} = userData
-    if(userData.password === userData.confirmPassword) {
-      const user = await register({...userInfo})
-       console.log(user);
-    } else {
-      alert('passwords missmatch')
-    }
-    
-    navigate('/login')
-  }
+  const { onRegisterSubmit } = useAuthContext();
+  const { values, changeHandler, onSubmit } = useForm(
+    {
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    onRegisterSubmit
+  );
 
   return (
-    <form action="/register" method="post" style={styles} onSubmit={onSubmitHandler}>
-      <label htmlFor="username">Username:</label>
-      <input type="text" id="username" name="username" value={userData.username} onChange={onUserDataChange} required />
+    <section>
+      <form
+        id="register"
+        method="post"
+        onSubmit={onSubmit}
+      >
+        <div>
+        <h2>Register</h2>
 
-      <label htmlFor="email">Email:</label>
-      <input type="email" id="email" name="email" value={userData.email} onChange={onUserDataChange} required />
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={values.username}
+          onChange={changeHandler}
+          required
+        />
 
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" name="password" value={userData.password} onChange={onUserDataChange} required />
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={values.email}
+          onChange={changeHandler}
+          required
+        />
 
-      <label htmlFor="confirmPassword">Confirm Password:</label>
-      <input
-        type="password"
-        id="confirmPassword"
-        name="confirmPassword"
-        value={userData.confirmPassword}
-        onChange={onUserDataChange}
-        required
-      />
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={values.password}
+          onChange={changeHandler}
+          required
+        />
 
-      <button type="submit">Register</button>
-    </form>
+        <label htmlFor="confirmPassword">Confirm Password:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={values.confirmPassword}
+          onChange={changeHandler}
+          required
+        />
+
+        <button type="submit">Register</button>
+
+        <p>
+            <span>If you already have profile click <Link to="/login">here</Link></span>
+        </p>
+        </div>
+      </form>
+    </section>
   );
 };
 
