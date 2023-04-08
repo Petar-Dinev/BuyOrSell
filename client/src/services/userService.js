@@ -8,11 +8,11 @@ const register = async (data) => {
 }
 
 const login = async (data) => {
-    return await request.post(`${baseUrl}login`, data)
+    return await request.post(`${baseUrl}login`, data)  
     
 }
 
-const logout = async (token) => {
+const logout = async () => {
    return await fetch(`${baseUrl}logout`)
 }
 

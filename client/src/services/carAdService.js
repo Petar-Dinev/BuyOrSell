@@ -26,7 +26,7 @@ export const edit = async (carAdId, newData) => {
     return result;
 }
 
-export const deleteCarAd = (carAdId) => {
-    del(`${baseUrl}/${carAdId}`)
+export const deleteCarAd = async (carAdId) => {
+   await del(`${baseUrl}/${carAdId}`)
 }
 
