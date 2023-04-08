@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {create, edit, getAll} from '../services/carAdService'
+import {create, edit, getAll, deleteCarAd} from '../services/carAdService'
 
 const CarAdContext = createContext();
 
@@ -10,12 +10,15 @@ export const CarAdProvider = ({
     const [carAds, setCarAds] = useState([]);
     const navigate = useNavigate()
 
+
     useEffect(() => {
         getAll()
         .then(result => {
             setCarAds(result)
         })
     }, []);
+
+    // console.log(carAds);
 
     if(!Array.isArray(carAds)) {
         setCarAds([]);
@@ -28,20 +31,20 @@ export const CarAdProvider = ({
     const onCreateCarAdSubmit = async (data) => {
         const newCarAd = await create(data)
 
-        setCarAds(state => ({...state, newCarAd}))
+        setCarAds(state => ([...state, newCarAd]))
 
         navigate("/catalog")
     }
 
     const onCarAdEditSubmit = async (values) => {
-        const result = await edit(values.id, values);
+        const result = await edit(values._id, values);
 
         setCarAds(state => state.map(x => x._id === values._id ? result : x));
 
         navigate(`/catalog/${values._id}`);
     }
 
-    const deleteCarAd = async (carAdId) => {
+    const onDeleteCarAd = async (carAdId) => {
         await deleteCarAd(carAdId);
         setCarAds(state => state.filter(carAd => carAd._id !== carAdId));
     }
@@ -51,7 +54,7 @@ export const CarAdProvider = ({
         onCreateCarAdSubmit,
         onCarAdEditSubmit,
         getCarAd,
-        deleteCarAd
+        onDeleteCarAd
     }
 
     return (

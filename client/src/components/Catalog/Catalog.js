@@ -15,6 +15,7 @@ const Catalog = () => {
             <CarAdItem carAd={carAd} />
           </li>
         ))}
+        {carAds.length === 0 && <p><b>Not Ads yet!</b></p>}
       </ul>
     </div>
   );

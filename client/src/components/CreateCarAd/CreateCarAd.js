@@ -18,6 +18,7 @@ const CreateCarAd = () => {
 
   return (
     <div className={styles["form-container"]}>
+      <div>
       <form onSubmit={onSubmit}>
         <label className={styles["form-label"]}>
           Brand:
@@ -102,6 +103,7 @@ const CreateCarAd = () => {
           Submit
         </button>
       </form>
+      </div>
     </div>
   );
 };
