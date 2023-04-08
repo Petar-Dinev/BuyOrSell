@@ -17,6 +17,10 @@ export const CarAdProvider = ({
         })
     }, []);
 
+    if(!Array.isArray(carAds)) {
+        setCarAds([]);
+    }
+
     const getCarAd = (carAdId) => {
         return carAds.find(carAd => carAd._id === carAdId);
     };
@@ -26,7 +30,7 @@ export const CarAdProvider = ({
 
         setCarAds(state => ({...state, newCarAd}))
 
-        navigate("/cars")
+        navigate("/catalog")
     }
 
     const onCarAdEditSubmit = async (values) => {
@@ -34,7 +38,7 @@ export const CarAdProvider = ({
 
         setCarAds(state => state.map(x => x._id === values._id ? result : x));
 
-        navigate(`/cars/${values._id}`);
+        navigate(`/catalog/${values._id}`);
     }
 
     const deleteCarAd = async (carAdId) => {

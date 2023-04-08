@@ -18,7 +18,7 @@ export const AuthProvider = ({
         try {
             const result = await userService.login(data)
             setUserData(result);
-            navigate('/cars')
+            navigate('/catalog')
         } catch(err) {
             console.log(err);
         }
@@ -33,7 +33,7 @@ export const AuthProvider = ({
         try {
             const result = await userService.register(registerData);
             setUserData(result)
-            navigate('/cars')
+            navigate('/catalog')
         } catch(err) {
             console.log(err);
         }
