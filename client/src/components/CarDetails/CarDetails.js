@@ -65,7 +65,7 @@ const CarDetails = () => {
         </div>
         <div>
           <h2>Comments:</h2>
-          <ul>
+          <ul style={{"list-style": "none"}}>
             {comments &&
               comments.map((c) => (
                 <li key={c._id}>

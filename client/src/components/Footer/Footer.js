@@ -10,7 +10,6 @@ const Footer = () => {
         <ul className={styles.nav}>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About Us</Link></li>
-          <li><Link to="/contactUs">Contact Us</Link></li>
         </ul>
       </div>
     </footer>

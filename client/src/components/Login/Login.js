@@ -19,7 +19,6 @@ const Login = () => {
   const [errors, setErrors] = useState({
     emailError: "",
     passwordError: "",
-    // errorsFromServer: '',
   });
 
   const onBlurHandler = (e) => {
