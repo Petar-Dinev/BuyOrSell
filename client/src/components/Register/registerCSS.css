@@ -32,4 +32,8 @@ form {
   button[type=submit]:hover {
     background-color: #45a049;
   }
+
+  .errorContainer {
+    color: red;
+  }
   
