@@ -16,7 +16,7 @@ import NotFound from "./components/NotFound/NotFound";
 import RouteGuard from "./components/Guards/RouteGuard";
 import OwnerGuard from "./components/Guards/OwnerGuard";
 import Catalog from "./components/Catalog/Catalog";
-
+import AboutPage from './components/AboutPage/AboutPage'
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<AboutPage />}  />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/catalog/:carAdId" element={<CarDetails />} />
           <Route element={<RouteGuard />}>
